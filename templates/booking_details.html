@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booking Details</title>
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<style>
+body {
+    background-image: url('{{url_for('static',filename='desk.jpg')}}');
+         
+    background-size: cover;
+    margin-top: 120px;
+    margin-bottom: 120px;
+}
+</style>
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="row p-5">
+                        <div class="col-md-6">
+                            <img src="{{url_for('static',filename='logo1.png')}}">
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <p class="font-weight-bold mb-1">Booking no:{{BRow[0]}}</p>
+                            <p class="text-muted">Due by: {{BRow[2]}}</p>
+                        </div>
+                    </div>
+
+                    <hr class="my-5">
+
+                    <div class="row pb-5 p-5">
+                        <div class="col-md-6">
+                            <p class="font-weight-bold mb-4">Client Information</p>
+                            <p class="mb-1">{{CRow[1]}}</p>
+                            <p class="mb-1">Client id : {{CRow[0]}}</p>
+                            <p class="mb-1">{{CRow[7]}}</p>
+                            <p class="mb-1">Aadhar: {{CRow[6]}}</p>
+                        </div>
+
+                        <div class="col-md-6 text-right">
+                            <p class="font-weight-bold mb-4">Tax Details</p>
+                            <p class="mb-1"><span class="text-muted">GST: </span> 18%</p>
+                           
+                        </div>
+                    </div>
+
+                    <div class="row p-5">
+                        <div class="col-md-12">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Vehicle-ID</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Model Name</th>
+                                        
+                                        <th class="border-0 text-uppercase small font-weight-bold">Unit Cost</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Total(with tax)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{BRow[3]}}</td>
+                                        <td>{{VRow[1]}}</td>
+                                        <td>{{VRow[3]}}</td>
+                                        <td>{{BRow[4]}}</td>
+                                        
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row-reverse bg-dark text-white p-4">
+                        <form method='POST'>
+                        <div class="py-3 px-5 text-right">
+                            <div class="mb-2">
+                                <input type="radio" name="decision" value="1" role="button" class= "btn btn-primary">CONFIRM</input>
+                            </div>
+                           <!-- <div class="h2 font-weight-light">$234,234</div>-->
+                        </div>
+
+                        <div class="py-3 px-5 text-right">
+                            <div class="mb-2"><input type="radio" name="decision" value="0" role="button" class= "btn btn-danger">CANCEL</input></div>
+                           <!-- <div class="h2 font-weight-light">10%</div>-->
+                        </div>
+                        <input type="submit" class="btn btn-info" value="Save">
+                    </form>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+</div>
+</body>
+</html>
+
+

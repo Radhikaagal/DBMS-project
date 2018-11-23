@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Billing Details</title>
+<style type="text/css">
+body {
+    background-image: url('{{url_for('static',filename='desk.jpg')}}');
+         
+    background-size: cover;
+    margin-top: 120px;
+    margin-bottom: 120px;
+}
+</style>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="row p-5">
+                        <div class="col-md-12 text-center">
+                            <p class="font-weight-bold mb-1">Invoice #{{BIRow[0]}}</p>
+                            <p class="text-muted">Generated on: {{today_date}}</p>
+                            <p class="text-muted">Supervised Under: {{emp_name}}</p>
+                        </div>
+                    </div>
+
+                    <hr class="my-5">
+
+                    <div class="row pb-5 p-5">
+                        <div class="col-md-6">
+                            <p class="font-weight-bold mb-4">Client Information</p>
+                            <p class="mb-1">Name: {{CRow[1]}}</p>
+                            <p class="mb-1">Client id : {{CRow[0]}}</p>
+                            <p class="mb-1">Address: {{CRow[7]}}</p>
+                            <p class="mb-1">Aadhar: {{CRow[6]}}</p>
+                        </div>
+
+                        <div class="col-md-6 text-right">
+                            <p class="font-weight-bold mb-4">Car Details</p>
+                            <p class="mb-1"><span class="text-muted">Car Model: </span> {{VRow[1]}}</p>
+                            <p class="mb-1"><span class="text-muted">Car Year: </span> {{VRow[2]}}</p>
+                            <p class="mb-1"><span class="text-muted">Odometer Reading: </span> {{SRow[5]}}</p>
+                            <p class="mb-1"><span class="text-muted">Date given: </span> {{SRow[3]}}</p>
+                            <p class="mb-1"><span class="text-muted">Next service date: </span> {{SRow[6]}}</p>
+                        </div>
+                    </div>
+
+                    <div class="row p-5">
+                        <div class="col-md-12">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Part ID</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Item</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Unit Cost(in INR)</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Durability Period</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for row in dataSP %}
+                                    <tr>
+                                        <td>{{ row[0] }}</td>
+                                        <td>{{ row[1] }}</td>
+                                        <td>{{ row[3] }}</td>
+                                        <td>{{ row[4] }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="row p-5">
+                        <div class="col-md-12">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Description of service</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Service charge(in INR)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                	<tr>
+                                		<td>Labour</td>
+                                		<td>1000</td>
+                                	</tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row-reverse bg-dark text-white p-4">
+                        <div class="py-3 px-5 text-right">
+                            <div class="mb-2">Grand Total</div>
+                            <div class="h2 font-weight-light">INR {{BIRow[3]}}</div>
+                        </div>
+
+                        <!--<div class="py-3 px-5 text-right">
+                            <div class="mb-2">Discount</div>
+                            <div class="h2 font-weight-light">10%</div>
+                        </div>
+
+                        <div class="py-3 px-5 text-right">
+                            <div class="mb-2">Sub - Total amount</div>
+                            <div class="h2 font-weight-light">$32,432</div>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+        <a href="/" class="btn btn-info btn-lg btn-block" role="button" style="float:right;">DONE</a>
+    </div></div>
+    
+    <!--<div class="text-light mt-5 mb-5 text-center small">by : <a class="text-light" target="_blank" href="http://totoprayogo.com">totoprayogo.com</a></div>-->
+
+</div>
+
+
+
+</body>
+</html>

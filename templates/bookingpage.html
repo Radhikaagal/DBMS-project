@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vehicle Information</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style type="text/css">
+    body {
+        color: #566787;
+		background: #f5f5f5;
+		font-family: 'Varela Round', sans-serif;
+		font-size: 13px;
+
+   		background-image: url("static/bgcar.jpg");
+   		
+   		background-size: cover;
+
+	}
+	.table-wrapper {
+        background: #fff;
+        padding: 20px 25px;
+        margin: 30px 0;
+		border-radius: 3px;
+        box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    }
+	.table-title {        
+		padding-bottom: 15px;
+		background: #435d7d;
+		color: #fff;
+		padding: 16px 30px;
+		margin: -20px -25px 10px;
+		border-radius: 3px 3px 0 0;
+    }
+    .table-title h2 {
+		margin: 5px 0 0;
+		font-size: 24px;
+	}
+	.table-title .btn-group {
+		float: right;
+	}
+	.table-title .btn {
+		color: #fff;
+		float: right;
+		font-size: 13px;
+		border: none;
+		min-width: 50px;
+		border-radius: 2px;
+		border: none;
+		outline: none !important;
+		margin-left: 10px;
+	}
+	.table-title .btn i {
+		float: left;
+		font-size: 21px;
+		margin-right: 5px;
+	}
+	.table-title .btn span {
+		float: left;
+		margin-top: 2px;
+	}
+    table.table tr th, table.table tr td {
+        border-color: #e9e9e9;
+		padding: 12px 15px;
+		vertical-align: middle;
+    }
+	table.table tr th:first-child {
+		width: 60px;
+	}
+	table.table tr th:last-child {
+		width: 100px;
+	}
+    table.table-striped tbody tr:nth-of-type(odd) {
+    	background-color: #fcfcfc;
+	}
+	table.table-striped.table-hover tbody tr:hover {
+		background: #f5f5f5;
+	}
+    table.table th i {
+        font-size: 13px;
+        margin: 0 5px;
+        cursor: pointer;
+    }	
+    table.table td:last-child i {
+		opacity: 0.9;
+		font-size: 22px;
+        margin: 0 5px;
+    }
+	table.table td a {
+		font-weight: bold;
+		color: #566787;
+		display: inline-block;
+		text-decoration: none;
+		outline: none !important;
+	}
+	table.table td a:hover {
+		color: #2196F3;
+	}
+	table.table td a.edit {
+        color: #FFC107;
+    }
+    table.table td a.delete {
+        color: #F44336;
+    }
+    table.table td i {
+        font-size: 19px;
+    }
+	table.table .avatar {
+		border-radius: 50%;
+		vertical-align: middle;
+		margin-right: 10px;
+	}
+    
+	/* Modal styles */
+	.modal .modal-dialog {
+		max-width: 400px;
+	}
+	.modal .modal-header, .modal .modal-body, .modal .modal-footer {
+		padding: 20px 30px;
+	}
+	.modal .modal-content {
+		border-radius: 3px;
+	}
+	.modal .modal-footer {
+		background: #ecf0f1;
+		border-radius: 0 0 3px 3px;
+	}
+    .modal .modal-title {
+        display: inline-block;
+    }
+	.modal .form-control {
+		border-radius: 2px;
+		box-shadow: none;
+		border-color: #dddddd;
+	}
+	.modal textarea.form-control {
+		resize: vertical;
+	}
+	.modal .btn {
+		border-radius: 2px;
+		min-width: 100px;
+	}	
+	.modal form label {
+		font-weight: normal;
+	}
+	.container .btn {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #f1f1f1;
+    color: black;
+    font-size: 16px;
+    padding: 16px 30px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.container .btn:hover {
+    background-color: black;
+    color: white;}	
+</style>
+
+<script>
+	function centerModal() {
+    $(this).css('display', 'block');
+    var $dialog = $(this).find(".modal-dialog");
+    var offset = ($(window).height() - $dialog.height()) / 2;
+    // Center modal vertically in window
+    $dialog.css("margin-top", offset);
+}
+$('.modal').on('show.bs.modal', centerModal);
+$(window).on("resize", function () {
+    $('.modal:visible').each(centerModal);
+});
+</script>
+
+</head>
+<body>
+
+    <div class="container">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+						<h2>Available<b> Automobiles</b></h2>
+					</div>
+					
+                </div>
+            </div>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+						
+                        <th>Vehicle id</th>
+                        <th>Model Name</th>
+						<th>Release Date</th>
+                        <th>Price(In INR lacs)</th>
+                        <th>Engine(cc)</th>
+                        <th>Fuel</th>
+                        <th>Mileage(in kms)</th>
+                        <th>Quantity</th>
+                        <!--<th>Action</th>-->
+                    </tr>
+                </thead>
+                <tbody>
+                	<div>
+                		{% for row in data %}
+                    		<tr>
+						
+                        		<td>{{ row[0] }}</td>
+                        		<td>{{ row[1] }}</td>
+                        		<td>{{ row[2] }}</td>
+                        		<td>{{ row[3] }}</td>
+                        		<td>{{ row[4] }}</td>
+                        		<td>{{ row[5] }}</td>
+                        		<td>{{ row[6] }}</td>
+                        		<td>{{ row[7] }}</td>
+
+                        		<!--<td>
+                            <a href="#addCustomer" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="BOOK">&#xe01b;</i></a>
+                                </td>-->
+                        	</tr>
+                        {% endfor %}
+                    </div>
+                       
+                </tbody>
+            </table>
+
+            <!--new addition delete if doesnt work-->
+            <br>
+            <h4>  View Images</h4>
+            <table class="table table-striped table-hover">
+                <thead>
+                	<tr>
+                		<th width="20%">V01</th>
+                		<th width="20%">V02</th>
+                		<th width="20%">V03</th>
+                		<th width="20%">V04</th>
+                		<th width="20%">V05</th>
+                	</tr>
+                </thead>
+                <tbody>
+                	<div>
+                		<tr>
+                			<td width="20%">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1"><i class="material-icons" data-toggle="tooltip" title="V01">&#xe1bc;</i></button>
+                            </td>
+                        
+                        
+                            <td width="20%">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2"><i class="material-icons" data-toggle="tooltip" title="V02">&#xe1bc;</i></button>
+                            </td>
+                        
+                            <td width="20%">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal3"><i class="material-icons" data-toggle="tooltip" title="V03">&#xe1bc;</i></button>
+                            </td>
+                        
+                            <td width="20%">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal4"><i class="material-icons" data-toggle="tooltip" title="V04">&#xe1bc;</i></button>
+                            </td>
+                        
+                            <td width="20%">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal5"><i class="material-icons" data-toggle="tooltip" title="V05">&#xe1bc;</i></button>
+                            </td>
+                		</tr>
+                	</div>
+                </tbody>
+            </table>
+           	
+		<!--previos stuff-->	
+        </div>
+        <a href="#addCustomer" class ="edit" data-toggle="modal">
+        	<button class="btn">BOOK NOW!</button>
+        </a>
+    </div>
+
+
+     <div id="myModal1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  		<div class="modal-dialog">
+    		<div class="modal-content">
+        		<div class="modal-body">
+            		<img src="static/mcqeen.jpg" class="img-responsive" style="max-width: 100%; height: auto">
+        		</div>
+    		</div>
+  		</div>
+	</div>
+
+	<div id="myModal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  		<div class="modal-dialog">
+    		<div class="modal-content">
+        		<div class="modal-body">
+            		<img src="static/cruz.jpg" class="img-responsive" style="max-width: 100%; height: auto">
+        		</div>
+    		</div>
+  		</div>
+	</div>
+
+	<div id="myModal3" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  		<div class="modal-dialog">
+    		<div class="modal-content">
+        		<div class="modal-body">
+            		<img src="static/delorean.jpg" class="img-responsive"  style="max-width: 100%; height: auto">
+        		</div>
+    		</div>
+  		</div>
+	</div>
+
+	<div id="myModal4" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  		<div class="modal-dialog">
+    		<div class="modal-content">
+        		<div class="modal-body">
+            		<img src="static/ecto.jpg" class="img-responsive" style="max-width: 100%; height: auto" >
+        		</div>
+    		</div>
+  		</div>
+	</div>
+
+	<div id="myModal5" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  		<div class="modal-dialog">
+    		<div class="modal-content">
+        		<div class="modal-body">
+            		<img src="static/ford.jpg" class="img-responsive" style="max-width: 100%; height: auto">
+        		</div>
+    		</div>
+  		</div>
+	</div>
+	
+	
+	
+	<div id="addCustomer" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form method="POST">
+					<div class="modal-header">						
+						<h4 class="modal-title">Add Customer Details</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label>VEHICLE SELECTED</label>
+						<select name="vehicle_id">
+							<option value="V01">Lightning McQueen</option>
+							<option value="V02">Cruz Ramirez</option>
+							<option value="V03">DeLorean</option>
+							<option value="V04">Ecto1</option>
+							<option value="V05">Ford Anglia</option>
+						</select>
+						</div>						
+						<div class="form-group">
+							<label>NAME</label>
+							<input name='cust_name' type="text" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label>DOB(yyyy-mm-dd)</label>
+							<input name='dob' type="text" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label>PHONE</label>
+							<input name='phone' type="text" pattern="[789][0-9]{9}" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label>EMAIL</label>
+							<input name='email' type="email" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label>ADDRESS</label>
+							<textarea name='address' class="form-control" required></textarea>
+						</div>
+						<div class="form-group">
+							<label>AADHAR</label>
+							<input name='aadhar' type= "text" pattern="[23456789][0-9]{11}" class="form-control" required>
+						</div>				
+					</div>
+					<div class="modal-footer">
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+						<input type="submit" class="btn btn-info" value="Save">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	
+</body>
+</html>                                		                            
