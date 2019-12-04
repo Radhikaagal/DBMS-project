@@ -21,11 +21,6 @@ def index():
 
 @app.route('/vehicles', methods=['GET','POST'])
 def info():
-	
-	cursor=conn.cursor()
-	cursor.execute("SELECT * from vehicle")
-	data=cursor.fetchall()	
-	cursor.close()
 	if request.method=='POST':
 		vehid=request.form.get("vehicle_id")
 		name=request.form.get("cust_name")
@@ -39,7 +34,7 @@ def info():
 		cursor.execute(query,(name,dateofbirth,vehid,number,mail,aad,add))
 		conn.commit()
 		return redirect('/vehicles/details')
-	return render_template('bookingpage.html', data=data)
+	return render_template('bookcar.html')
 
 
 @app.route('/vehicles/details', methods=['GET', 'POST'])
@@ -161,8 +156,9 @@ def serv():
 		total_cost = 1000
 		for part in part_list:
 			cursor.execute("select cost from spare_parts where part_id = %s", part)
-			dataPA= cursor.fetchall();
-			total_cost += dataPA[0]
+			dataPA= cursor.fetchall()
+			dataPA2=dataPA[0]
+			total_cost += dataPA2[0]
 		cursor.execute("select * from service order by service_num desc limit 1")
 		data = cursor.fetchall()
 		SRow = data[0]
@@ -204,11 +200,16 @@ def bil():
 	VRow=dataV[0]
 	cursor.execute("select * from parts_used where service_num=%s", dataB[0])
 	dataPU=cursor.fetchall()
-	dataSP=()
+	dataSP=[]
 	PURow=dataPU[0]
 	for i in range(PURow[1]):
 		cursor.execute("select * from spare_parts where part_id=%s", PURow[i+2])
-		dataSP=cursor.fetchall()
+		dataSP.append(cursor.fetchall())
+
+	dataSpt=tuple(dataSP)
+	dataSP=[]
+	for tup in dataSpt:
+		dataSP.append(tup[0])
 
 	today_date=datetime.today()
 	cursor.execute("select * from service where service_num=%s", BillRow[0])
